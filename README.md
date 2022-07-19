@@ -1,2 +1,7 @@
-# todo-list
-Exercise from TOP curriculum
+# Todo list
+
+## Description
+
+This project was created for the Todo list assignment as part of The Odin Project curriculum.
+
+### Project summary
