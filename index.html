@@ -4,9 +4,110 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Restaurant page - TOP project</title>
+    <link rel="shortcut icon" href="./images/logo.png" />
+    <title>ToDo list</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/dc996feb6b.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="main.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <h1 class="header-title">
+        <i class="fa-solid fa-list-check"></i>ToDo List
+      </h1>
+    </header>
+    <main class="main">
+      <div class="input">
+        <button class="btn-toggle-input" id="btn-toggle-input">
+          <i class="fa-solid fa-circle-plus"></i>Add list
+        </button>
+        <div class="input-modal">
+          <input
+            type="text"
+            placeholder="List name"
+            class="list-input"
+            id="list-input"
+          />
+          <div class="input-btn-group">
+            <button class="btn-add-list" id="btn-add-list">Add</button>
+            <button class="btn-cancel-list" id="btn-cancel-list">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+
+      <div class="projects active">
+        <h2 class="projects-title">My lists</h2>
+        <div class="project">
+          <i class="fa-solid fa-check-double"></i>
+          <h3 class="project-title">
+            Groceries <span class="task-count">1 &#62;</span>
+          </h3>
+          <button class="btn-edit">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn-remove">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+        <div class="project">
+          <i class="fa-solid fa-check-double"></i>
+          <h3 class="project-title">
+            Mails <span class="task-count">0 &#62;</span>
+          </h3>
+          <button class="btn-edit">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn-remove">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- List -->
+
+      <div class="list">
+        <div class="list-header">
+          <h2 class="list-title">List title</h2>
+          <button class="btn-back">&#60; Back</button>
+        </div>
+        <div class="list-task">
+          <i class="fa-solid fa-circle-check task-check"></i>
+          <h3 class="project-title">New task</h3>
+          <button class="btn-edit">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn-remove">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+        <div class="list-task completed">
+          <i class="fa-solid fa-circle-check task-check checked"></i>
+          <h3 class="project-title">New task</h3>
+          <button class="btn-edit">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn-remove">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>Made by VeejayPL</p>
+      <a href="https://github.com/veejaypl" target="_blank">
+        <i class="fa-brands fa-github"></i
+      ></a>
+    </footer>
+  </body>
 </html>
