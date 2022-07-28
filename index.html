@@ -51,7 +51,7 @@
         <div class="project">
           <i class="fa-solid fa-check-double"></i>
           <h3 class="project-title">
-            Groceries <span class="task-count">1 &#62;</span>
+            Today <span class="task-count">1 &#62;</span>
           </h3>
           <button class="btn-edit">
             <i class="fa-solid fa-pen"></i>
@@ -63,7 +63,7 @@
         <div class="project">
           <i class="fa-solid fa-check-double"></i>
           <h3 class="project-title">
-            Mails <span class="task-count">0 &#62;</span>
+            This week <span class="task-count">0 &#62;</span>
           </h3>
           <button class="btn-edit">
             <i class="fa-solid fa-pen"></i>
@@ -109,5 +109,33 @@
         <i class="fa-brands fa-github"></i
       ></a>
     </footer>
+
+    <!-- Modal -->
+    <div class="task-modal active">
+      <div class="modal-content">
+        <button class="btn-close">&#60; Back</button>
+        <input
+          type="text"
+          placeholder="Task name"
+          class="task-input"
+          id="task-name"
+        />
+        <input
+          type="text"
+          placeholder="Notes"
+          class="task-input"
+          id="task-note"
+        />
+        <input
+          type="date"
+          class="task-input"
+          id="task-date"
+          placeholder="Due date"
+          value="current date"
+        />
+
+        <button class="btn-add-task" id="btn-add-task">Add</button>
+      </div>
+    </div>
   </body>
 </html>

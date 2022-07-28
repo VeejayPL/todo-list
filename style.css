@@ -22,7 +22,7 @@
 
 html {
   position: relative;
-  min-height: 100vh;
+  min-height: 100%;
 }
 body {
   font-size: 18px;
@@ -56,7 +56,7 @@ button {
 .header {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
 }
 .fa-list-check {
   margin-right: var(--spacing-sm);
@@ -65,7 +65,7 @@ button {
 
 /* Main */
 .main {
-  padding: var(--spacing-md);
+  padding: 0 var(--spacing-md);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,11 +90,12 @@ button {
   margin-right: var(--spacing-xs);
 }
 .btn-toggle-input {
+  font-size: larger;
   background: var(--grey);
   color: var(--blue);
   align-self: center;
   justify-self: end;
-  width: 25%;
+  width: 30%;
   transition: transform 100ms;
 }
 .input-modal {
@@ -156,6 +157,7 @@ button {
   padding-right: var(--spacing-lg);
 }
 .fa-check-double {
+  color: var(--green);
   text-align: center;
   margin: auto;
 }
@@ -211,9 +213,11 @@ button {
   margin: auto;
   opacity: 0.3;
   color: var(--blue);
+  transition: color 500ms;
 }
 .task-check.checked {
   opacity: 1;
+  color: var(--green);
 }
 .list-task {
   width: 100%;
@@ -244,6 +248,69 @@ button {
 }
 .fa-github:hover {
   transform: scale(1.3);
+}
+
+/* Modal */
+.task-modal {
+  position: fixed;
+  z-index: 1;
+  top: 10%;
+  right: 3%;
+  width: 94%;
+  height: 80%;
+  border-radius: 8px;
+  overflow-x: hidden;
+  background: var(--white);
+  transform: translateX(110%);
+  transition: 200ms;
+  visibility: hidden;
+}
+.task-modal.active {
+  transform: none;
+  visibility: visible;
+}
+.modal-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md);
+}
+.task-input {
+  width: 100%;
+  background: var(--grey);
+}
+.btn-add-task {
+  width: 40%;
+  background: var(--green);
+}
+.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-self: flex-end;
+  background: var(--white);
+  color: var(--blue);
+  text-align: right;
+  padding: var(--spacing-md);
+  width: 25%;
+}
+
+/* Animation */
+.projects,
+.list {
+  animation: fadein 600ms forwards;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (min-width: 700px) {
