@@ -19,6 +19,7 @@ export default () => {
   };
 
   domElement.btnAddList.addEventListener("click", () => {
+    clearList();
     addProject();
     loadProjects();
   });
@@ -55,7 +56,8 @@ export default () => {
 </div>`;
   };
 
-  const clearList = () => domElement.projectView;
+  const clearList = () =>
+    (domElement.projectView.innerHTML = `<h2 class="projects-title">My lists</h2>`);
 
   // Toggle inputs / moving through app
   domElement.btnToggleInput.addEventListener("click", () => {
