@@ -8,12 +8,12 @@ export default () => {
   };
 
   const addProject = (projectName) => {
-    if (contains(projectName)) return;
+    if (contains(projectName.getName())) return;
     projects.push(projectName);
   };
 
   const contains = (projectName) => {
-    return projects.some((project) => project.name === projectName);
+    return projects.some((project) => project.getName() === projectName);
   };
 
   const getProject = (projectName) => {
