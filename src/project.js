@@ -25,6 +25,10 @@ export default (projectName) => {
     return tasks;
   };
 
+  const getTasksCount = () => {
+    return tasks.length;
+  };
+
   const contains = (taskName) => {
     return tasks.some((task) => task.getName() === taskName);
   };
@@ -46,6 +50,7 @@ export default (projectName) => {
     addTask,
     getTasks,
     getTask,
+    getTasksCount,
     contains,
     deleteTask,
     getTodayTasks,
