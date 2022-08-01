@@ -3,11 +3,21 @@ import Task from "./task";
 import Project from "./project";
 import ProjectList from "./projectList";
 import * as domElement from "./dom.js";
+import { ta } from "date-fns/locale";
 
 export default () => {
-  // Initialize ToDo List
+  // Initialize ToDo List with tasks
   const toDoList = ProjectList();
-  toDoList.addProject(Project("Today"));
+  const todayProject = Project("Today");
+  toDoList.addProject(todayProject);
+
+  const emailTask = Task("Respond to emails");
+  const laundryTask = Task("Laundry");
+  const newTask = Task("New task");
+
+  todayProject.addTask(emailTask);
+  todayProject.addTask(laundryTask);
+  todayProject.addTask(newTask);
 
   // Add project
   const addProject = () => {
@@ -24,6 +34,7 @@ export default () => {
   const loadProjects = () => {
     toDoList.getProjects().forEach((project) => createList(project.getName()));
     console.log(toDoList.getProjects());
+    console.log(todayProject.getTasks());
   };
 
   domElement.btnAddList.addEventListener("click", () => {
@@ -40,7 +51,7 @@ export default () => {
     domElement.projectView.innerHTML += `<div class="project">
   <i class="fa-solid fa-check-double"></i>
   <h3 class="project-title">
-    ${projectName} <span class="task-count">&#62;</span>
+    ${projectName} <span class="task-count"></span>
   </h3>
   <button class="btn-edit">
     <i class="fa-solid fa-pen"></i>
@@ -49,10 +60,15 @@ export default () => {
     <i class="fa-solid fa-trash"></i>
   </button>
 </div>`;
-
+    taskCountDisplay(projectName);
     initProjectTitle();
   };
 
+  const taskCountDisplay = (projectName) => {
+    const taskCount = document.querySelector(".task-count");
+    const counter = toDoList.getProject(projectName).getTasksCount();
+    return (taskCount.innerHTML += `${counter} &#62;`);
+  };
   const clearList = () =>
     (domElement.projectView.innerHTML = `<h2 class="projects-title">My lists</h2>`);
 
