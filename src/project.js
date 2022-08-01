@@ -8,10 +8,12 @@ export default (projectName) => {
     return (name = newName);
   };
 
-  const getName = () => name;
+  const getName = () => {
+    return name;
+  };
 
   const addTask = (taskName) => {
-    if (contains(taskName)) return;
+    if (contains(taskName.getName())) return;
     tasks.push(taskName);
   };
 
@@ -19,14 +21,16 @@ export default (projectName) => {
     return tasks.find((task) => task === taskName);
   };
 
-  const getTasks = () => tasks;
+  const getTasks = () => {
+    return tasks;
+  };
 
   const contains = (taskName) => {
-    return tasks.some((task) => task === taskName);
+    return tasks.some((task) => task.getName() === taskName);
   };
 
   const deleteTask = (taskName) => {
-    return (tasks = tasks.filter((task) => task !== taskName));
+    return (tasks = tasks.filter((task) => task.getName() !== taskName));
   };
 
   const getTodayTasks = () => {

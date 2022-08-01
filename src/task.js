@@ -1,7 +1,7 @@
-export default (taskName, notes, dueDate) => {
+export default (taskName, notes, date) => {
   let name = taskName;
-  let notes = notes;
-  let dueDate = dueDate;
+  let note = notes;
+  let dueDate = date;
 
   const getName = () => name;
 
@@ -9,9 +9,19 @@ export default (taskName, notes, dueDate) => {
     return (name = newName);
   };
 
-  const getNotes = () => notes;
+  const setNote = (newNote) => {
+    return (note = newNote);
+  };
+
+  const getNote = () => note;
 
   const getDate = () => dueDate;
 
-  return { getName, setName, getNotes, getDate };
+  return {
+    getName,
+    setName,
+    setNote,
+    getNote,
+    getDate,
+  };
 };
