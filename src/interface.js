@@ -12,17 +12,28 @@ export default () => {
   // Add project
   const addProject = () => {
     const projectName = domElement.listName.value;
-    return toDoList.addProject(Project(projectName));
+    if (projectName === "") {
+      alert("Field can't be empty!");
+      return;
+    } else if (toDoList.contains(projectName)) {
+      alert("Project name already exists!");
+      return;
+    } else return toDoList.addProject(Project(projectName));
   };
+
   const loadProjects = () => {
     toDoList.getProjects().forEach((project) => createList(project.getName()));
+    console.log(toDoList.getProjects());
   };
 
   domElement.btnAddList.addEventListener("click", () => {
     clearList();
     addProject();
     loadProjects();
+    clearInput();
   });
+
+  const clearInput = () => (domElement.listName.value = "");
 
   // List display
   const createList = (projectName) => {
@@ -42,6 +53,9 @@ export default () => {
     initProjectTitle();
   };
 
+  const clearList = () =>
+    (domElement.projectView.innerHTML = `<h2 class="projects-title">My lists</h2>`);
+
   // Task display
   const createTask = (taskName) => {
     domElement.listView.innerHTML += `<div class="list-task">
@@ -56,8 +70,8 @@ export default () => {
 </div>`;
   };
 
-  const clearList = () =>
-    (domElement.projectView.innerHTML = `<h2 class="projects-title">My lists</h2>`);
+  const clearProject = () =>
+    (domElement.listView.innerHTML = ` <h2 class="list-title">List title</h2>`);
 
   // Toggle inputs / moving through app
   domElement.btnToggleInput.addEventListener("click", () => {
