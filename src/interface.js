@@ -9,7 +9,9 @@ export default () => {
   // Initialize ToDo List with tasks
   const toDoList = ProjectList();
   const todayProject = Project("Today");
+  const inbox = Project("Inbox");
   toDoList.addProject(todayProject);
+  toDoList.addProject(inbox);
 
   const emailTask = Task("Respond to emails");
   const laundryTask = Task("Laundry");
@@ -18,6 +20,8 @@ export default () => {
   todayProject.addTask(emailTask);
   todayProject.addTask(laundryTask);
   todayProject.addTask(newTask);
+  inbox.addTask(emailTask);
+  inbox.addTask(laundryTask);
 
   // Add and load projects
   const addProject = () => {
@@ -59,8 +63,7 @@ export default () => {
   const createList = (projectName) => {
     domElement.projectView.innerHTML += `<div class="project">
   <i class="fa-solid fa-check-double"></i>
-  <h3 class="project-title">
-    ${projectName} <span class="task-count">${taskCountDisplay(
+  <h3 class="project-title">${projectName}<span class="task-count">${taskCountDisplay(
       projectName
     )} &#62;</span>
   </h3>
@@ -71,7 +74,7 @@ export default () => {
     <i class="fa-solid fa-trash"></i>
   </button>
 </div>`;
-    initProjectTitle(projectName);
+    initProjectTitle();
   };
 
   const taskCountDisplay = (projectName) => {
@@ -123,10 +126,13 @@ export default () => {
     domElement.inputTask.classList.toggle("active");
   });
 
-  const initProjectTitle = (projectName) => {
+  const initProjectTitle = () => {
     const projectTitle = document.querySelectorAll(".project-title");
     projectTitle.forEach((title) =>
-      title.addEventListener("click", () => {
+      title.addEventListener("click", (e) => {
+        // to remove the span and get actual project name
+        const projectName = e.target.textContent.slice(0, -6);
+        console.log(projectName);
         clearProject(projectName);
         domElement.projectView.classList.toggle("active");
         domElement.listView.classList.toggle("active");
