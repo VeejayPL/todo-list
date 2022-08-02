@@ -19,7 +19,7 @@ export default () => {
   todayProject.addTask(laundryTask);
   todayProject.addTask(newTask);
 
-  // Add project
+  // Add and load projects
   const addProject = () => {
     const projectName = domElement.listName.value;
     if (projectName === "") {
@@ -44,6 +44,14 @@ export default () => {
     clearInput();
   });
 
+  // Add and load tasks
+  const loadTasks = (projectName) => {
+    toDoList
+      .getProject(projectName)
+      .getTasks()
+      .forEach((task) => createTask(task.getName()));
+  };
+
   const clearInput = () => (domElement.listName.value = "");
 
   // List display
@@ -62,21 +70,19 @@ export default () => {
     <i class="fa-solid fa-trash"></i>
   </button>
 </div>`;
-    initProjectTitle();
+    initProjectTitle(projectName);
   };
 
   const taskCountDisplay = (projectName) => {
-    toDoList.getProject(projectName).getTasksCount();
+    return toDoList.getProject(projectName).getTasksCount();
   };
+
   const clearList = () =>
     (domElement.projectView.innerHTML = `<h2 class="projects-title">My lists</h2>`);
 
   // Task display
   const createTask = (taskName) => {
-    domElement.listView.innerHTML += `<div class="list-header">
-    <h2 class="list-title">List title</h2>
-    <button class="btn-back">&#60; Back</button>
-  </div>
+    domElement.listView.innerHTML += `
   <div class="list-task">
   <i class="fa-solid fa-circle-check task-check"></i>
   <h3 class="task-title">${taskName}</h3>
@@ -89,8 +95,11 @@ export default () => {
 </div>`;
   };
 
-  const clearProject = () =>
-    (domElement.listView.innerHTML = ` <h2 class="list-title">List title</h2>`);
+  const clearProject = (projectName) =>
+    (domElement.listView.innerHTML = `<div class="list-header">
+    <h2 class="list-title">${projectName}</h2>
+    <button class="btn-back">&#60; Back</button>
+  </div>`);
 
   // Toggle inputs / moving through app
   domElement.btnToggleInput.addEventListener("click", () => {
@@ -127,12 +136,14 @@ export default () => {
     domElement.inputTask.classList.toggle("active");
   });
 
-  const initProjectTitle = () => {
+  const initProjectTitle = (projectName) => {
     const projectTitle = document.querySelectorAll(".project-title");
     projectTitle.forEach((title) =>
       title.addEventListener("click", () => {
+        clearProject(projectName);
         domElement.projectView.classList.toggle("active");
         domElement.listView.classList.toggle("active");
+        loadTasks(projectName);
         if (domElement.inputList.classList.contains("active"))
           domElement.inputList.classList.toggle("active");
         domElement.btnToggleInput.lastChild.textContent = "Add task";
