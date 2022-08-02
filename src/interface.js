@@ -129,6 +129,7 @@ export default () => {
     <i class="fa-solid fa-trash"></i>
   </button>
 </div>`;
+    initRemoveTaskBtn(taskName);
   };
 
   const clearProject = (projectName) =>
@@ -190,6 +191,18 @@ export default () => {
       clearList();
       loadProjects();
     });
+  };
+
+  const initRemoveTaskBtn = (taskName) => {
+    const projectName = document.querySelector(".list-title").textContent;
+    const removeBtn = document.querySelectorAll(".btn-remove");
+    removeBtn.forEach((button) =>
+      button.addEventListener("click", () => {
+        toDoList.getProject(projectName).deleteTask(taskName);
+        clearProject(projectName);
+        loadTasks(projectName);
+      })
+    );
   };
 
   const initToggleCompleted = () => {
