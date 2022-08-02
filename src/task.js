@@ -1,7 +1,7 @@
 export default (taskName, notes, date) => {
   let name = taskName;
-  let note = notes;
-  let dueDate = date;
+  let note = notes || "Notes";
+  let dueDate = date || "No date";
 
   const getName = () => name;
 
