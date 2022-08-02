@@ -50,6 +50,7 @@ export default () => {
       .getProject(projectName)
       .getTasks()
       .forEach((task) => createTask(task.getName()));
+    initBackBtn();
   };
 
   const clearInput = () => (domElement.listName.value = "");
@@ -118,20 +119,6 @@ export default () => {
     domElement.inputList.classList.toggle("active");
   });
 
-  // domElement.projectTitle.addEventListener("click", () => {
-  //   domElement.projectView.classList.toggle("active");
-  //   domElement.listView.classList.toggle("active");
-  //   if (domElement.inputList.classList.contains("active"))
-  //     domElement.inputList.classList.toggle("active");
-  //   domElement.btnToggleInput.lastChild.textContent = "Add task";
-  // });
-
-  domElement.btnBack.addEventListener("click", () => {
-    domElement.projectView.classList.toggle("active");
-    domElement.listView.classList.toggle("active");
-    domElement.btnToggleInput.lastChild.textContent = "Add list";
-  });
-
   domElement.btnCloseModal.addEventListener("click", () => {
     domElement.inputTask.classList.toggle("active");
   });
@@ -149,6 +136,15 @@ export default () => {
         domElement.btnToggleInput.lastChild.textContent = "Add task";
       })
     );
+  };
+
+  const initBackBtn = () => {
+    const backBtn = document.querySelector(".btn-back");
+    backBtn.addEventListener("click", () => {
+      domElement.projectView.classList.toggle("active");
+      domElement.listView.classList.toggle("active");
+      domElement.btnToggleInput.lastChild.textContent = "Add list";
+    });
   };
 
   // // Need to add for all - picks only the first one
