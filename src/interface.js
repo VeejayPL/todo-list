@@ -51,7 +51,9 @@ export default () => {
     domElement.projectView.innerHTML += `<div class="project">
   <i class="fa-solid fa-check-double"></i>
   <h3 class="project-title">
-    ${projectName} <span class="task-count"></span>
+    ${projectName} <span class="task-count">${taskCountDisplay(
+      projectName
+    )} &#62;</span>
   </h3>
   <button class="btn-edit">
     <i class="fa-solid fa-pen"></i>
@@ -60,21 +62,22 @@ export default () => {
     <i class="fa-solid fa-trash"></i>
   </button>
 </div>`;
-    taskCountDisplay(projectName);
     initProjectTitle();
   };
 
   const taskCountDisplay = (projectName) => {
-    const taskCount = document.querySelector(".task-count");
-    const counter = toDoList.getProject(projectName).getTasksCount();
-    return (taskCount.innerHTML += `${counter} &#62;`);
+    toDoList.getProject(projectName).getTasksCount();
   };
   const clearList = () =>
     (domElement.projectView.innerHTML = `<h2 class="projects-title">My lists</h2>`);
 
   // Task display
   const createTask = (taskName) => {
-    domElement.listView.innerHTML += `<div class="list-task">
+    domElement.listView.innerHTML += `<div class="list-header">
+    <h2 class="list-title">List title</h2>
+    <button class="btn-back">&#60; Back</button>
+  </div>
+  <div class="list-task">
   <i class="fa-solid fa-circle-check task-check"></i>
   <h3 class="task-title">${taskName}</h3>
   <button class="btn-edit">
