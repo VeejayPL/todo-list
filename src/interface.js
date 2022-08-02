@@ -30,25 +30,39 @@ export default () => {
       alert("Field can't be empty!");
       return;
     } else if (toDoList.contains(projectName)) {
-      alert("Project name already exists!");
+      alert("Project already exists!");
       return;
     } else return toDoList.addProject(Project(projectName));
   };
 
   const loadProjects = () => {
     toDoList.getProjects().forEach((project) => createList(project.getName()));
-    console.log(toDoList.getProjects());
-    console.log(todayProject.getTasks());
   };
 
-  domElement.btnAddList.addEventListener("click", () => {
+  domElement.btnAddList.addEventListener("click", () => initAddProject());
+
+  const initAddProject = () => {
     clearList();
     addProject();
     loadProjects();
     clearInput();
-  });
+  };
+
+  const clearInput = () => (domElement.listName.value = "");
 
   // Add and load tasks
+  const addTask = (projectName) => {
+    const taskName = domElement.taskName.value;
+    console.log(taskName);
+    if (taskName === "") {
+      alert("Field can't be empty!");
+      return;
+    } else if (toDoList.getProject(projectName).contains(taskName)) {
+      alert("Task already exists!");
+      return;
+    } else return toDoList.getProject(projectName).addTask(Task(taskName));
+  };
+
   const loadTasks = (projectName) => {
     toDoList
       .getProject(projectName)
@@ -57,7 +71,25 @@ export default () => {
     initBackBtn();
   };
 
-  const clearInput = () => (domElement.listName.value = "");
+  domElement.btnAddTask.addEventListener("click", () => {
+    initAddTask();
+    toggleTaskModal();
+    clearModalInput();
+  });
+
+  const initAddTask = () => {
+    const projectName = document.querySelector(".list-title").textContent;
+    console.log(projectName);
+    addTask(projectName);
+    clearProject(projectName);
+    loadTasks(projectName);
+  };
+
+  const clearModalInput = () => {
+    domElement.taskName.value = "";
+    domElement.taskNote.value = "";
+    domElement.taskDate.value = "";
+  };
 
   // List display
   const createList = (projectName) => {
@@ -120,11 +152,14 @@ export default () => {
 
   domElement.btnCancel.addEventListener("click", () => {
     domElement.inputList.classList.toggle("active");
+    clearInput();
   });
 
   domElement.btnCloseModal.addEventListener("click", () => {
-    domElement.inputTask.classList.toggle("active");
+    toggleTaskModal();
   });
+
+  const toggleTaskModal = () => domElement.inputTask.classList.toggle("active");
 
   const initProjectTitle = () => {
     const projectTitle = document.querySelectorAll(".project-title");
@@ -150,6 +185,8 @@ export default () => {
       domElement.projectView.classList.toggle("active");
       domElement.listView.classList.toggle("active");
       domElement.btnToggleInput.lastChild.textContent = "Add list";
+      clearList();
+      loadProjects();
     });
   };
 
