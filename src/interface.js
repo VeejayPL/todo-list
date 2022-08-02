@@ -53,7 +53,6 @@ export default () => {
   // Add and load tasks
   const addTask = (projectName) => {
     const taskName = domElement.taskName.value;
-    console.log(taskName);
     if (taskName === "") {
       alert("Field can't be empty!");
       return;
@@ -69,6 +68,7 @@ export default () => {
       .getTasks()
       .forEach((task) => createTask(task.getName()));
     initBackBtn();
+    initToggleCompleted();
   };
 
   domElement.btnAddTask.addEventListener("click", () => {
@@ -137,6 +137,8 @@ export default () => {
     <button class="btn-back">&#60; Back</button>
   </div>`);
 
+  // Delete project / task
+
   // Toggle inputs / moving through app
   domElement.btnToggleInput.addEventListener("click", () => {
     if (domElement.listView.classList.contains("active")) {
@@ -190,11 +192,15 @@ export default () => {
     });
   };
 
-  // // Need to add for all - picks only the first one
-  // document.querySelector(".task-check").addEventListener("click", (e) => {
-  //   e.target.parentNode.classList.toggle("completed");
-  //   e.target.classList.toggle("checked");
-  // });
+  const initToggleCompleted = () => {
+    const taskCheck = document.querySelectorAll(".task-check");
+    taskCheck.forEach((task) =>
+      task.addEventListener("click", (e) => {
+        e.target.parentNode.classList.toggle("completed");
+        e.target.classList.toggle("checked");
+      })
+    );
+  };
 
   loadProjects();
 };
