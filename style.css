@@ -1,7 +1,7 @@
 :root {
   --white: #fffbfe;
   --blue: #007ea7;
-  --grey: #d0cfcf;
+  --grey: #e6e0e0;
   --red: #f03a47;
   --green: #88bb92;
   --black: #00171f;
@@ -74,7 +74,7 @@ button {
 }
 
 /* Input field */
-.input {
+.main-input {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(100%, 1fr);
@@ -111,11 +111,11 @@ button {
   display: flex;
   gap: var(--spacing-sm);
 }
-.input.active .input-modal {
+.main-input.active .input-modal {
   transform: none;
   visibility: visible;
 }
-.input.active .btn-toggle-input {
+.main-input.active .btn-toggle-input {
   transform: scale(0);
   visibility: hidden;
 }
@@ -150,7 +150,8 @@ button {
   grid-template-columns: 1fr 5fr 1fr 1fr;
   margin-bottom: var(--spacing-md);
 }
-.project-title {
+.project-title,
+.task-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -162,6 +163,7 @@ button {
   margin: auto;
 }
 .project-title,
+.task-title,
 .btn-edit,
 .btn-remove {
   border-bottom: 2px solid var(--blue);
@@ -176,7 +178,7 @@ button {
   background: var(--white);
 }
 .btn-edit {
-  color: var(--black);
+  color: var(--green);
 }
 .btn-remove {
   color: var(--red);
@@ -296,21 +298,6 @@ button {
   text-align: right;
   padding: var(--spacing-md);
   width: 25%;
-}
-
-/* Animation */
-.projects,
-.list {
-  animation: fadein 600ms forwards;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 @media (min-width: 700px) {

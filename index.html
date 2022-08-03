@@ -26,7 +26,7 @@
       </h1>
     </header>
     <main class="main">
-      <div class="input">
+      <div class="main-input">
         <button class="btn-toggle-input" id="btn-toggle-input">
           <i class="fa-solid fa-circle-plus"></i>Add list
         </button>
@@ -48,60 +48,11 @@
 
       <div class="projects active">
         <h2 class="projects-title">My lists</h2>
-        <div class="project">
-          <i class="fa-solid fa-check-double"></i>
-          <h3 class="project-title">
-            Today <span class="task-count">1 &#62;</span>
-          </h3>
-          <button class="btn-edit">
-            <i class="fa-solid fa-pen"></i>
-          </button>
-          <button class="btn-remove">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-        <div class="project">
-          <i class="fa-solid fa-check-double"></i>
-          <h3 class="project-title">
-            This week <span class="task-count">0 &#62;</span>
-          </h3>
-          <button class="btn-edit">
-            <i class="fa-solid fa-pen"></i>
-          </button>
-          <button class="btn-remove">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
       </div>
 
       <!-- List -->
 
-      <div class="list">
-        <div class="list-header">
-          <h2 class="list-title">List title</h2>
-          <button class="btn-back">&#60; Back</button>
-        </div>
-        <div class="list-task">
-          <i class="fa-solid fa-circle-check task-check"></i>
-          <h3 class="project-title">New task</h3>
-          <button class="btn-edit">
-            <i class="fa-solid fa-pen"></i>
-          </button>
-          <button class="btn-remove">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-        <div class="list-task completed">
-          <i class="fa-solid fa-circle-check task-check checked"></i>
-          <h3 class="project-title">New task</h3>
-          <button class="btn-edit">
-            <i class="fa-solid fa-pen"></i>
-          </button>
-          <button class="btn-remove">
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
-      </div>
+      <div class="list"></div>
     </main>
     <footer class="footer">
       <p>Made by VeejayPL</p>
@@ -127,7 +78,6 @@
           id="task-note"
         />
         <input type="date" class="task-input" id="task-date" />
-
         <button class="btn-add-task" id="btn-add-task">Add</button>
       </div>
     </div>
