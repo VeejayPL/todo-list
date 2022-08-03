@@ -36,7 +36,10 @@ export default () => {
   };
 
   const loadProjects = () => {
-    toDoList.getProjects().forEach((project) => createList(project.getName()));
+    toDoList.getProjects().forEach((project) => {
+      createList(project.getName());
+      initProjectTitle();
+    });
   };
 
   domElement.btnAddList.addEventListener("click", () => initAddProject());
@@ -67,6 +70,7 @@ export default () => {
       .getProject(projectName)
       .getTasks()
       .forEach((task) => createTask(task.getName()));
+    initRemoveTaskBtn();
     initBackBtn();
     initToggleCompleted();
   };
@@ -79,7 +83,6 @@ export default () => {
 
   const initAddTask = () => {
     const projectName = document.querySelector(".list-title").textContent;
-    console.log(projectName);
     addTask(projectName);
     clearProject(projectName);
     loadTasks(projectName);
@@ -106,7 +109,6 @@ export default () => {
     <i class="fa-solid fa-trash"></i>
   </button>
 </div>`;
-    initProjectTitle();
   };
 
   const taskCountDisplay = (projectName) => {
@@ -129,7 +131,6 @@ export default () => {
     <i class="fa-solid fa-trash"></i>
   </button>
 </div>`;
-    initRemoveTaskBtn(taskName);
   };
 
   const clearProject = (projectName) =>
@@ -170,7 +171,6 @@ export default () => {
       title.addEventListener("click", (e) => {
         // to remove the span and get actual project name
         const projectName = e.target.textContent.slice(0, -6);
-        console.log(projectName);
         clearProject(projectName);
         domElement.projectView.classList.toggle("active");
         domElement.listView.classList.toggle("active");
@@ -193,11 +193,14 @@ export default () => {
     });
   };
 
-  const initRemoveTaskBtn = (taskName) => {
-    const projectName = document.querySelector(".list-title").textContent;
+  const initRemoveTaskBtn = () => {
     const removeBtn = document.querySelectorAll(".btn-remove");
+    const projectName = document.querySelector(".list-title").textContent;
+
     removeBtn.forEach((button) =>
-      button.addEventListener("click", () => {
+      button.addEventListener("click", (e) => {
+        const taskName = e.target.parentNode.textContent.trim();
+        console.log(taskName);
         toDoList.getProject(projectName).deleteTask(taskName);
         clearProject(projectName);
         loadTasks(projectName);
