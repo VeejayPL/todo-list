@@ -146,8 +146,6 @@ export default () => {
     removeBtn.forEach((button) =>
       button.addEventListener("click", (e) => {
         const projectName = e.target.parentNode.textContent.trim().slice(0, -3);
-        console.log(e.target.parentNode.textContent);
-        console.log(projectName);
         toDoList.deleteProject(projectName);
         clearList();
         loadProjects();
