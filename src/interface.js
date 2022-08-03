@@ -39,6 +39,7 @@ export default () => {
     toDoList.getProjects().forEach((project) => {
       createList(project.getName());
       initProjectTitle();
+      initRemoveProjectBtn();
     });
   };
 
@@ -139,7 +140,22 @@ export default () => {
     <button class="btn-back">&#60; Back</button>
   </div>`);
 
-  // Delete project / task
+  // Delete project and task / toggle completed
+  const initRemoveProjectBtn = () => {
+    const removeBtn = document.querySelectorAll(".btn-remove");
+
+    removeBtn.forEach((button) =>
+      button.addEventListener("click", (e) => {
+        const projectName = e.target.parentNode.textContent.trim().slice(0, -3);
+        console.log(e.target.parentNode.textContent);
+        console.log(projectName);
+        toDoList.deleteProject(projectName);
+        clearList();
+        loadProjects();
+      })
+    );
+  };
+
   const initRemoveTaskBtn = () => {
     const removeBtn = document.querySelectorAll(".btn-remove");
     const projectName = document.querySelector(".list-title").textContent;
