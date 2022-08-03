@@ -52,6 +52,10 @@ button {
   cursor: pointer;
 }
 
+button > i {
+  pointer-events: none;
+}
+
 /* Header */
 .header {
   display: flex;
