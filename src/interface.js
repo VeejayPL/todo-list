@@ -3,7 +3,6 @@ import Task from "./task";
 import Project from "./project";
 import ProjectList from "./projectList";
 import * as domElement from "./dom.js";
-import { ta } from "date-fns/locale";
 
 export default () => {
   // Initialize ToDo List with tasks
@@ -102,7 +101,7 @@ export default () => {
   <h3 class="project-title">${projectName}<span class="task-count">${taskCountDisplay(
       projectName
     )} &#62;</span>
-  </h3>
+</h3>
   <button class="btn-edit">
     <i class="fa-solid fa-pen"></i>
   </button>
@@ -209,7 +208,7 @@ export default () => {
     projectTitle.forEach((title) =>
       title.addEventListener("click", (e) => {
         // to remove the span and get actual project name
-        const projectName = e.target.textContent.slice(0, -6);
+        const projectName = e.target.textContent.trim().slice(0, -3);
         clearProject(projectName);
         domElement.projectView.classList.toggle("active");
         domElement.listView.classList.toggle("active");
