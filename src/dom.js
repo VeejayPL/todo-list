@@ -10,5 +10,11 @@ export const inputTask = document.querySelector(".task-modal");
 export const project = document.querySelector(".project");
 export const projectView = document.querySelector(".projects");
 export const listView = document.querySelector(".list");
+export const listTitle = document.querySelector(".list-title");
 
 export const listName = document.querySelector("#list-input");
+
+export const taskName = document.querySelector("#task-name");
+export const taskNote = document.querySelector("#task-note");
+export const taskDate = document.querySelector("#task-date");
+export const btnAddTask = document.querySelector("#btn-add-task");

@@ -103,7 +103,7 @@ export default () => {
     )} &#62;</span>
 </h3>
   <button class="btn-edit">
-    <i class="fa-solid fa-pen"></i>
+    <i class="fa-solid fa-circle-info"></i>
   </button>
   <button class="btn-remove">
     <i class="fa-solid fa-trash"></i>
@@ -125,7 +125,7 @@ export default () => {
   <i class="fa-solid fa-circle-check task-check"></i>
   <h3 class="task-title">${taskName}</h3>
   <button class="btn-edit">
-    <i class="fa-solid fa-pen"></i>
+    <i class="fa-solid fa-circle-info"></i>
   </button>
   <button class="btn-remove">
     <i class="fa-solid fa-trash"></i>
