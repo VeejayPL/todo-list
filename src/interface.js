@@ -140,6 +140,29 @@ export default () => {
   </div>`);
 
   // Delete project / task
+  const initRemoveTaskBtn = () => {
+    const removeBtn = document.querySelectorAll(".btn-remove");
+    const projectName = document.querySelector(".list-title").textContent;
+
+    removeBtn.forEach((button) =>
+      button.addEventListener("click", (e) => {
+        const taskName = e.target.parentNode.textContent.trim();
+        toDoList.getProject(projectName).deleteTask(taskName);
+        clearProject(projectName);
+        loadTasks(projectName);
+      })
+    );
+  };
+
+  const initToggleCompleted = () => {
+    const taskCheck = document.querySelectorAll(".task-check");
+    taskCheck.forEach((task) =>
+      task.addEventListener("click", (e) => {
+        e.target.parentNode.classList.toggle("completed");
+        e.target.classList.toggle("checked");
+      })
+    );
+  };
 
   // Toggle inputs / moving through app
   domElement.btnToggleInput.addEventListener("click", () => {
@@ -191,31 +214,6 @@ export default () => {
       clearList();
       loadProjects();
     });
-  };
-
-  const initRemoveTaskBtn = () => {
-    const removeBtn = document.querySelectorAll(".btn-remove");
-    const projectName = document.querySelector(".list-title").textContent;
-
-    removeBtn.forEach((button) =>
-      button.addEventListener("click", (e) => {
-        const taskName = e.target.parentNode.textContent.trim();
-        console.log(taskName);
-        toDoList.getProject(projectName).deleteTask(taskName);
-        clearProject(projectName);
-        loadTasks(projectName);
-      })
-    );
-  };
-
-  const initToggleCompleted = () => {
-    const taskCheck = document.querySelectorAll(".task-check");
-    taskCheck.forEach((task) =>
-      task.addEventListener("click", (e) => {
-        e.target.parentNode.classList.toggle("completed");
-        e.target.classList.toggle("checked");
-      })
-    );
   };
 
   loadProjects();
