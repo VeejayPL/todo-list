@@ -206,7 +206,7 @@ export default () => {
     projectTitle.forEach((title) =>
       title.addEventListener("click", (e) => {
         // to remove the span and get actual project name
-        const projectName = e.target.textContent.trim().slice(0, -3);
+        const projectName = e.currentTarget.textContent.trim().slice(0, -3);
         clearProject(projectName);
         domElement.projectView.classList.toggle("active");
         domElement.listView.classList.toggle("active");
