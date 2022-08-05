@@ -3,8 +3,13 @@ import Task from "./task";
 import Project from "./project";
 import ProjectList from "./projectList";
 import * as domElement from "./dom.js";
+import { el } from "date-fns/locale";
 
 export default () => {
+  const loadHomePage = () => {
+    loadProjects();
+    initTaskTitle();
+  };
   // Initialize ToDo List with tasks
   const toDoList = ProjectList();
   const todayProject = Project("Today");
@@ -12,8 +17,8 @@ export default () => {
   toDoList.addProject(todayProject);
   toDoList.addProject(inbox);
 
-  const emailTask = Task("Respond to emails");
-  const laundryTask = Task("Laundry");
+  const emailTask = Task("Respond to emails", "Check", "21/07/2022");
+  const laundryTask = Task("Laundry", "Wash trousers");
   const newTask = Task("New task");
 
   todayProject.addTask(emailTask);
@@ -56,13 +61,18 @@ export default () => {
   // Add and load tasks
   const addTask = (projectName) => {
     const taskName = domElement.taskName.value;
+    const taskNote = domElement.taskNote.value;
+    const taskDate = domElement.taskDate.value;
     if (taskName === "") {
       alert("Field can't be empty!");
       return;
     } else if (toDoList.getProject(projectName).contains(taskName)) {
       alert("Task already exists!");
       return;
-    } else return toDoList.getProject(projectName).addTask(Task(taskName));
+    } else
+      return toDoList
+        .getProject(projectName)
+        .addTask(Task(taskName, taskNote, taskDate));
   };
 
   const loadTasks = (projectName) => {
@@ -123,14 +133,34 @@ export default () => {
     domElement.listView.innerHTML += `
   <div class="list-task">
   <i class="fa-solid fa-circle-check task-check"></i>
-  <h3 class="task-title">${taskName}</h3>
-  <button class="btn-edit">
+  <div class="task">
+  <div class="task-desc">
+  <h3 class="task-title" data-toggle-task>${taskName}</h3>
+  <p class="task-notes" data-toggle-task>${getTaskNotes(taskName)}</p>
+  </div>
+  <div class="task-info">
+  <p class="task-date">${getTaskDate(taskName)}</p>
+  <div class="task-btn-group">
+  <button class="task-btn-edit">
     <i class="fa-solid fa-circle-info"></i>
   </button>
-  <button class="btn-remove">
+  <button class="task-btn-remove">
     <i class="fa-solid fa-trash"></i>
   </button>
+  </div>
+  </div>
+  </div>
 </div>`;
+  };
+
+  const getTaskNotes = (taskName) => {
+    const projectName = document.querySelector(".list-title").textContent;
+    return toDoList.getProject(projectName).getTask(taskName).getNote();
+  };
+
+  const getTaskDate = (taskName) => {
+    const projectName = document.querySelector(".list-title").textContent;
+    return toDoList.getProject(projectName).getTask(taskName).getDate();
   };
 
   const clearProject = (projectName) =>
@@ -154,12 +184,16 @@ export default () => {
   };
 
   const initRemoveTaskBtn = () => {
-    const removeBtn = document.querySelectorAll(".btn-remove");
+    const removeBtn = document.querySelectorAll(".task-btn-remove");
     const projectName = document.querySelector(".list-title").textContent;
 
     removeBtn.forEach((button) =>
       button.addEventListener("click", (e) => {
-        const taskName = e.target.parentNode.textContent.trim();
+        const taskName =
+          e.currentTarget.parentNode.parentNode.parentNode.querySelector(
+            ".task-title"
+          ).textContent;
+        console.log(taskName);
         toDoList.getProject(projectName).deleteTask(taskName);
         clearProject(projectName);
         loadTasks(projectName);
@@ -218,6 +252,23 @@ export default () => {
     );
   };
 
+  const initTaskTitle = () => {
+    const taskContainer = domElement.listView;
+    taskContainer.addEventListener("click", (e) => {
+      const notes = e.target.parentNode.querySelector(".task-notes");
+      const taskDate =
+        e.target.parentNode.parentNode.querySelector(".task-date");
+      const taskBtns =
+        e.target.parentNode.parentNode.querySelector(".task-btn-group");
+
+      if (e.target.dataset.toggleTask !== undefined) {
+        notes.classList.toggle("active");
+        taskDate.classList.toggle("active");
+        taskBtns.classList.toggle("active");
+      }
+    });
+  };
+
   const initBackBtn = () => {
     const backBtn = document.querySelector(".btn-back");
     backBtn.addEventListener("click", () => {
@@ -229,5 +280,5 @@ export default () => {
     });
   };
 
-  loadProjects();
+  loadHomePage();
 };
