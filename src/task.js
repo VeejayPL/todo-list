@@ -1,7 +1,8 @@
 export default (taskName, notes, date) => {
   let name = taskName;
-  let note = notes || "Notes";
-  let dueDate = date || "No date";
+  let note = notes || "";
+  let dueDate = date || "";
+  let isChecked = false;
 
   const getName = () => name;
 
@@ -17,11 +18,14 @@ export default (taskName, notes, date) => {
 
   const getDate = () => dueDate;
 
+  const isCompleted = () => isChecked;
+
   return {
     getName,
     setName,
     setNote,
     getNote,
     getDate,
+    isCompleted,
   };
 };
