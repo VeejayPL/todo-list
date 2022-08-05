@@ -3,13 +3,16 @@ import Task from "./task";
 import Project from "./project";
 import ProjectList from "./projectList";
 import * as domElement from "./dom.js";
-import { el } from "date-fns/locale";
 
 export default () => {
   const loadHomePage = () => {
+    initToggleInput();
+    initAddListBtn();
+    initBtnCancel();
     loadProjects();
     initProjectTitle();
     initTaskTitle();
+    initCloseModalBtn();
   };
   // Initialize ToDo List with tasks
   const toDoList = ProjectList();
@@ -213,26 +216,34 @@ export default () => {
   };
 
   // Toggle inputs / moving through app
-  domElement.btnToggleInput.addEventListener("click", () => {
-    if (domElement.listView.classList.contains("active")) {
-      domElement.inputTask.classList.toggle("active");
-    } else {
+  const initToggleInput = () => {
+    domElement.btnToggleInput.addEventListener("click", () => {
+      if (domElement.listView.classList.contains("active")) {
+        domElement.inputTask.classList.toggle("active");
+      } else {
+        domElement.inputList.classList.toggle("active");
+      }
+    });
+  };
+
+  const initAddListBtn = () => {
+    domElement.btnAddList.addEventListener("click", () => {
       domElement.inputList.classList.toggle("active");
-    }
-  });
+    });
+  };
 
-  domElement.btnAddList.addEventListener("click", () => {
-    domElement.inputList.classList.toggle("active");
-  });
+  const initBtnCancel = () => {
+    domElement.btnCancel.addEventListener("click", () => {
+      domElement.inputList.classList.toggle("active");
+      clearInput();
+    });
+  };
 
-  domElement.btnCancel.addEventListener("click", () => {
-    domElement.inputList.classList.toggle("active");
-    clearInput();
-  });
-
-  domElement.btnCloseModal.addEventListener("click", () => {
-    toggleTaskModal();
-  });
+  const initCloseModalBtn = () => {
+    domElement.btnCloseModal.addEventListener("click", () => {
+      toggleTaskModal();
+    });
+  };
 
   const toggleTaskModal = () => domElement.inputTask.classList.toggle("active");
 
