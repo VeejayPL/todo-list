@@ -8,6 +8,7 @@ import { el } from "date-fns/locale";
 export default () => {
   const loadHomePage = () => {
     loadProjects();
+    initProjectTitle();
     initTaskTitle();
   };
   // Initialize ToDo List with tasks
@@ -42,7 +43,7 @@ export default () => {
   const loadProjects = () => {
     toDoList.getProjects().forEach((project) => {
       createList(project.getName());
-      initProjectTitle();
+
       initRemoveProjectBtn();
     });
   };
@@ -108,7 +109,7 @@ export default () => {
   const createList = (projectName) => {
     domElement.projectView.innerHTML += `<div class="project">
   <i class="fa-solid fa-check-double"></i>
-  <h3 class="project-title">${projectName}<span class="task-count">${taskCountDisplay(
+  <h3 class="project-title" data-toggle-project>${projectName}<span class="task-count">${taskCountDisplay(
       projectName
     )} &#62;</span>
 </h3>
@@ -236,11 +237,14 @@ export default () => {
   const toggleTaskModal = () => domElement.inputTask.classList.toggle("active");
 
   const initProjectTitle = () => {
-    const projectTitle = document.querySelectorAll(".project-title");
-    projectTitle.forEach((title) =>
-      title.addEventListener("click", (e) => {
-        // to remove the span and get actual project name
-        const projectName = e.currentTarget.textContent.trim().slice(0, -3);
+    const projectContainer = domElement.projectView;
+
+    projectContainer.addEventListener("click", (e) => {
+      // to remove the span and get actual project name
+      const projectName = e.target.textContent.trim().slice(0, -3);
+
+      if (e.target.dataset.toggleProject !== undefined) {
+        console.log(projectName);
         clearProject(projectName);
         domElement.projectView.classList.toggle("active");
         domElement.listView.classList.toggle("active");
@@ -248,8 +252,8 @@ export default () => {
         if (domElement.inputList.classList.contains("active"))
           domElement.inputList.classList.toggle("active");
         domElement.btnToggleInput.lastChild.textContent = "Add task";
-      })
-    );
+      }
+    });
   };
 
   const initTaskTitle = () => {
