@@ -18,7 +18,7 @@ export default (projectName) => {
   };
 
   const getTask = (taskName) => {
-    return tasks.find((task) => task === taskName);
+    return tasks.find((task) => task.getName() === taskName);
   };
 
   const getTasks = () => {
